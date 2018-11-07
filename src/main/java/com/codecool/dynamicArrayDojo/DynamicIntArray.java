@@ -13,17 +13,7 @@ public class DynamicIntArray {
     }
 
     public void add(int num) {
-        this.arr = increaseArr();
-        this.arr[this.arr.length - 1] = num;
-    }
-
-    private int[] increaseArr() {
-        int[] newArr = new int[this.arr.length + 1];
-
-        for (int i = 0; i < this.arr.length; i++ ) {
-            newArr[i] = this.arr[i];
-        }
-        return newArr;
+        this.arr = addToEndOfArr(num);
     }
 
     public void remove(int index) throws IndexOutOfBoundsException {
@@ -49,7 +39,44 @@ public class DynamicIntArray {
         return newArr;
     }
 
-    public void insert(int index, int num) {}
+    public void insert(int index, int num) {
+        boolean indexGreaterThanLength = index >= this.arr.length;
+        boolean indexNegative = index < 0;
+
+        if (indexGreaterThanLength) this.arr = this.addToEndOfArr(num);
+        else {
+            if (indexNegative) index = 0;
+            this.arr = insertElem(index, num);
+        }
+    }
+
+    private int[] insertElem(int index, int num) {
+        boolean inserted = false;
+        int[] newArr = new int[this.arr.length + 1];
+
+        for (int i = 0; i < this.arr.length; i++ ) {
+            if (index == i) {
+                newArr[i] = num;
+                inserted = true;
+            }
+
+            if (inserted)
+                newArr[i + 1] = this.arr[i];
+            else
+                newArr[i] = this.arr[i];
+        }
+        return newArr;
+    }
+
+    private int[] addToEndOfArr(int num) {
+        int[] newArr = new int[this.arr.length + 1];
+
+        for (int i = 0; i < this.arr.length; i++ ) {
+            newArr[i] = this.arr[i];
+        }
+        newArr[newArr.length - 1] = num;
+        return newArr;
+    }
 
     @Override
     public String toString() { return arrToString(); }
