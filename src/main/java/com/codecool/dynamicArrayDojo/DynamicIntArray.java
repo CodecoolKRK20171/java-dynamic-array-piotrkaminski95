@@ -26,7 +26,28 @@ public class DynamicIntArray {
         return newArr;
     }
 
-    public void remove(int index) {}
+    public void remove(int index) throws IndexOutOfBoundsException {
+        boolean indexOutOfBound = index < 0 || index >= this.arr.length;
+
+        if (indexOutOfBound) throw new ArrayIndexOutOfBoundsException();
+
+        this.arr = decreaseArr(index);
+    }
+
+    private int[] decreaseArr(int dropIndex) {
+        int[] newArr = new int[this.arr.length - 1];
+        boolean dropedIndex = false;
+
+        for (int i = 0; i < newArr.length; i++ ) {
+            if (dropIndex == i) dropedIndex = true;
+
+            if (dropedIndex)
+                newArr[i] = this.arr[i + 1];
+            else
+                newArr[i] = this.arr[i];
+        }
+        return newArr;
+    }
 
     public void insert(int index, int num) {}
 
