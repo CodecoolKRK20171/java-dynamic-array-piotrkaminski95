@@ -8,7 +8,9 @@ public class DynamicIntArray {
         this.arr = new int[0];
     }
 
-    public DynamicIntArray(int size) {}
+    public DynamicIntArray(int size) {
+        this.arr = new int[size];
+    }
 
     public void add(int num) {}
 
