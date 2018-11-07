@@ -17,4 +17,15 @@ public class DynamicIntArray {
     public void remove(int index) {}
 
     public void insert(int index, int num) {}
+
+    @Override
+    public String toString() {
+        String toReturn = "";
+
+        for (int n : this.arr) {
+            toReturn = String.format("%s%s", toReturn, Integer.toString(n));
+        }
+
+        return toReturn;
+    }
 }
